@@ -36,4 +36,6 @@ class Signup extends Component {
   }
 }
 
-export default graphql(mutation)(Signup);
+export default graphql(query)(
+  graphql(mutation)(Signup)
+);

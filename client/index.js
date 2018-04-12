@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ApolloClient, { createNetworkInterface } from 'apollo-client';
+import ApolloClient from 'apollo-boost';
+import { createHttpLink } from 'apollo-link-http';
 import { ApolloProvider } from 'react-apollo';
 import { Router, hashHistory, Route, IndexRoute } from 'react-router';
 
@@ -8,16 +9,16 @@ import App from './components/App';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 
-const networkInterface = createNetworkInterface({
+const link = createHttpLink({
   uri: '/graphql',
-  opts: {
+  fetchOptions: {
     credentials: 'same-origin',
   }
 });
 
 const client = new ApolloClient({
   dataIdFromObject: o => o.id,
-  networkInterface,
+  link,
 });
 
 const Root = () => {

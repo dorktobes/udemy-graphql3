@@ -13,6 +13,13 @@ class LoginForm extends Component {
     };
   }
 
+  static getDerivedStateFromProps(nextProps, nextState) {
+    if(nextProps.data.user) {
+      
+    }
+    return nextState;
+  }
+
   onSubmit({ email, password }) {
     this.props.mutate({
       variables: {
@@ -37,4 +44,6 @@ class LoginForm extends Component {
   }
 }
 
-export default graphql(mutation)(LoginForm);
+export default graphql(query)(
+  graphql(mutation)(LoginForm)
+);
