@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
+import { hashHistory } from 'react-router';
 
 import AuthForm from './AuthForm';
 import mutation from '../mutations/Login';
@@ -13,11 +14,10 @@ class LoginForm extends Component {
     };
   }
 
-  static getDerivedStateFromProps(nextProps, nextState) {
-    if(nextProps.data.user) {
-      
+  componentDidUpdate(prevProps) {
+    if(this.props.data.user) {
+      hashHistory.push('/dashboard');
     }
-    return nextState;
   }
 
   onSubmit({ email, password }) {
